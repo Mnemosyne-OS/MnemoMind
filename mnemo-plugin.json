@@ -1,0 +1,43 @@
+{
+  "name": "@mnemosyne-plugins/mnemo-mind",
+  "displayName": "MnemoMind",
+  "version": "0.2.0",
+  "category": "Memory",
+  "vendor": "Mnemosyne Labs",
+  "license": "MIT",
+  "description": "Knowledge about the mind, in your memory: cognitive biases, mental disorders, schools of psychology, neuroscience, memory and learning. MnemoMind reads Wikipedia by category (English, French, Spanish; CC BY-SA 4.0), the OpenStax Psychology 2e textbook (CC BY-NC-SA 4.0) and the health topics of the US National Institute of Mental Health (public domain), and keeps them in your knowledge folder and in one memory pack per topic. Every memory ends with its source, its date and its licence. It gives no medical advice.",
+  "descriptionI18n": {
+    "en": "Knowledge about the mind, in your memory: cognitive biases, mental disorders, schools of psychology, neuroscience, memory and learning. MnemoMind reads Wikipedia by category (English, French, Spanish; CC BY-SA 4.0), the OpenStax Psychology 2e textbook (CC BY-NC-SA 4.0) and the health topics of the US National Institute of Mental Health (public domain), and keeps them in your knowledge folder and in one memory pack per topic. Every memory ends with its source, its date and its licence. It gives no medical advice.",
+    "fr": "Les connaissances sur l'esprit, dans ta mémoire : biais cognitifs, troubles mentaux, grands courants de la psychologie, neurosciences, mémoire et apprentissage. MnemoMind lit Wikipédia par catégorie (anglais, français, espagnol ; CC BY-SA 4.0), le manuel OpenStax Psychology 2e (CC BY-NC-SA 4.0) et les sujets de santé de l'Institut national de la santé mentale des États-Unis (domaine public), et les range dans ton dossier des connaissances et dans un pack de mémoire par sujet. Chaque mémoire finit par sa source, sa date et sa licence. Il ne donne pas de conseil médical.",
+    "es": "El conocimiento sobre la mente, en tu memoria: sesgos cognitivos, trastornos mentales, corrientes de la psicología, neurociencia, memoria y aprendizaje. MnemoMind lee Wikipedia por categoría (inglés, francés, español; CC BY-SA 4.0), el manual OpenStax Psychology 2e (CC BY-NC-SA 4.0) y los temas de salud del Instituto Nacional de Salud Mental de Estados Unidos (dominio público), y los guarda en tu carpeta de conocimientos y en un paquete de memoria por tema. Cada memoria termina con su fuente, su fecha y su licencia. No da consejo médico."
+  },
+  "keywords": [
+    "cognitive biases",
+    "memory",
+    "mental health",
+    "neuroscience",
+    "nimh",
+    "openstax",
+    "psychology",
+    "wikipedia"
+  ],
+  "permissions": [
+    "vault:write",
+    "vault:read",
+    "dialog:open"
+  ],
+  "updateStrategy": "git",
+  "entrypoints": {
+    "renderer": "index.html"
+  },
+  "widgets": [
+    {
+      "id": "mnemo-mind-main",
+      "icon": "🧠",
+      "name": "MnemoMind",
+      "route": "index.html",
+      "defaultWidth": 760,
+      "defaultHeight": 780
+    }
+  ]
+}

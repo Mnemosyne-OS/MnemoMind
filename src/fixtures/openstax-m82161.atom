@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:/openstax/osbooks-psychology/commits/main/modules/m82161/index.cnxml</id>
+  <link type="text/html" rel="alternate" href="https://github.com/openstax/osbooks-psychology/commits/main/modules/m82161/index.cnxml"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/openstax/osbooks-psychology/commits/main/modules/m82161/index.cnxml.atom"/>
+  <title>Recent Commits to osbooks-psychology:main</title>
+  <updated>2023-11-21T16:28:04Z</updated>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/b6f4084b5aa61443bb2e4c2684512ba0e9a817c3</id>
+    <link type="text/html" rel="alternate" href="https://github.com/openstax/osbooks-psychology/commit/b6f4084b5aa61443bb2e4c2684512ba0e9a817c3"/>
+    <title>
+        currency update
+    </title>
+    <updated>2023-11-21T16:28:04Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/1895432?s=30&amp;v=4"/>
+    <author>
+      <name>oscryan</name>
+      <uri>https://github.com/oscryan</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;currency update&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/7bc8d4fdabb9cda25ea65aa4b41f856060019b2f</id>
+    <link type="text/html" rel="alternate" href="https://github.com/openstax/osbooks-psychology/commit/7bc8d4fdabb9cda25ea65aa4b41f856060019b2f"/>
+    <title>
+        sync with archive cnx.org
+    </title>
+    <updated>2022-01-14T17:54:20Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/e6bda498734b99c5d213e9393e13270c?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>openstax@openstax.org</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;sync with archive cnx.org&lt;/pre&gt;
+    </content>
+  </entry>
+</feed>
