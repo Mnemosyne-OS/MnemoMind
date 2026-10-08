@@ -1,6 +1,6 @@
 {
   "name": "@mnemosyne-plugins/mnemo-mind",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "Knowledge about the mind in memory: cognitive biases, mental disorders, schools of psychology, neuroscience, memory and learning. MnemoMind reads Wikipedia (by category, en/fr/es), the OpenStax Psychology 2e textbook and NIMH health topics, and keeps them in your knowledge folder and in one memory pack per topic, with a source line on every memory. The cartridge ships no content.",

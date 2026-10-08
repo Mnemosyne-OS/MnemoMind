@@ -1,8 +1,9 @@
 {
   "name": "@mnemosyne-plugins/mnemo-mind",
   "displayName": "MnemoMind",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "category": "Memory",
+  "icon": "icon.svg",
   "vendor": "Mnemosyne Labs",
   "license": "MIT",
   "description": "Knowledge about the mind, in your memory: cognitive biases, mental disorders, schools of psychology, neuroscience, memory and learning. MnemoMind reads Wikipedia by category (English, French, Spanish; CC BY-SA 4.0), the OpenStax Psychology 2e textbook (CC BY-NC-SA 4.0) and the health topics of the US National Institute of Mental Health (public domain), and keeps them in your knowledge folder and in one memory pack per topic. Every memory ends with its source, its date and its licence. It gives no medical advice.",
