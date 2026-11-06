@@ -2,7 +2,7 @@
  * SubdomainView — one sub-domain: a tile per wired source, the running job,
  * and what the last gesture did. Every action goes back up to App.
  */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { S } from './styles';
 import { SourceTile } from './SourceTile';
 import { remainingSeconds, formatDuration } from './eta';
@@ -30,6 +30,10 @@ export function SubdomainView(props: {
 }) {
   const { t, lang, sub, job, now } = props;
   const [openKey, setOpenKey] = useState<string | null>(null);
+  // A job opens its source's tile, whoever started it (an agent's list, doc 149): the person
+  // sees the list being read and the entries being added.
+  const jobKey = job?.key ?? null;
+  useEffect(() => { if (jobKey) setOpenKey(jobKey); }, [jobKey]);
   const seconds = job ? Math.max(0, Math.round((now - job.startedAt) / 1000)) : 0;
 
   return (

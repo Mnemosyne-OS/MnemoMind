@@ -19,7 +19,7 @@
  * the tiles say "reading…" or "unreadable", never "nothing in memory".
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { MnemoCartridgeSDK } from './sdk/mnemo-sdk';
+import { sdk } from './host';
 import { useI18n } from './i18n/useI18n';
 import { translate } from './i18n/strings';
 import { SUBDOMAIN_FOLDER, batchKey, type SourceId, type Subdomain } from './sources/catalogue';
@@ -36,14 +36,13 @@ import { S } from './ui/styles';
 import { Home } from './ui/Home';
 import { SubdomainView } from './ui/SubdomainView';
 import { Footer } from './ui/Footer';
+import { MindAgentActions } from './ui/MindAgentActions';
 import { defaultWikiLang, type Job, type LibStatus, type ListState, type View } from './ui/types';
 import type { WikiLang } from './sources/sourceInfo';
 
 /** The one door to the host: the SDK's `invoke`. Injected in tests, to play a host that refuses. */
 export type Invoke = <T = unknown>(action: string, payload?: unknown, timeoutMs?: number) => Promise<T>;
 
-// Must match "name" in mnemo-plugin.json: the host keys the app's packs and durable state on it.
-const sdk = new MnemoCartridgeSDK('@mnemosyne-plugins/mnemo-mind');
 const sdkInvoke: Invoke = (action, payload, timeoutMs) => sdk.invoke(action, payload, timeoutMs);
 
 /** Every host call that is not paced by the person gets the house deadline (rule 9). */
@@ -341,6 +340,23 @@ export default function App({ invoke = sdkInvoke }: { invoke?: Invoke } = {}) {
           }}
         />
       )}
+
+      {/* What an agent may do here (doc 149): the same tiles, lists and Add buttons the person uses. */}
+      <MindAgentActions
+        view={view}
+        libStatus={libStatus}
+        lib={lib}
+        lists={lists}
+        job={job}
+        wikiLang={wikiLang ?? defaultWikiLang(lang)}
+        go={go}
+        setWikiLang={setWikiLang}
+        retryLibrary={loadLibrary}
+        openList={openList}
+        addOne={addOne}
+        addAll={addAll}
+        stop={() => abortRef.current?.abort()}
+      />
 
       <Footer
         t={t}

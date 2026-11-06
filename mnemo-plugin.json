@@ -1,7 +1,7 @@
 {
   "name": "@mnemosyne-plugins/mnemo-mind",
   "displayName": "MnemoMind",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "category": "Memory",
   "icon": "icon.svg",
   "vendor": "Mnemosyne Labs",
@@ -27,10 +27,262 @@
     "vault:read",
     "dialog:open"
   ],
+  "repository": "https://github.com/Mnemosyne-OS/MnemoMind",
   "updateStrategy": "git",
   "entrypoints": {
     "renderer": "index.html"
   },
+  "agentGuide": [
+    "Name a text the way the person says it (« effet de halo », « Halo effect »): add finds it by its title in the list. Several matches are refused with their titles (AMBIGUOUS): pick one and call again.",
+    "Without topic or source, entries, add and addAll work on the topic and the list open on screen; listSource takes the topic on screen.",
+    "To look: openTopic for a topic, listSource for a source list, goHome for the five topics. setLanguage changes Wikipedia’s language.",
+    "MnemoMind files texts; it does not read, sum up or comment on them, and gives no medical advice."
+  ],
+  "agentActions": [
+    {
+      "id": "status",
+      "summary": "Say what MnemoMind shows and holds: the topic on screen, the job running, and what is already in memory per topic and source",
+      "details": "inMemory has one line per topic, source and language: entries in memory, failed, refused by the source, listed the last time the list was read. library is reading or unreadable while the record of what is in memory is not read; nothing can be added then.",
+      "effect": "read"
+    },
+    {
+      "id": "topics",
+      "summary": "List the five topics and the sources each one offers, with their languages",
+      "details": "Topics: biases, disorders, schools, neuro, memory. Sources: wikipedia (en, fr, es), openstax (Psychology 2e, en), nimh (disorders only, en).",
+      "effect": "read"
+    },
+    {
+      "id": "openTopic",
+      "summary": "Show one topic's screen, as a click on its tile does",
+      "effect": "write",
+      "params": {
+        "topic": {
+          "type": "string",
+          "description": "The topic",
+          "enum": [
+            "biases",
+            "disorders",
+            "schools",
+            "neuro",
+            "memory"
+          ]
+        }
+      },
+      "required": [
+        "topic"
+      ]
+    },
+    {
+      "id": "goHome",
+      "summary": "Go back to the five topics, as the Back link does",
+      "details": "Refused during an import; a list being read stops.",
+      "effect": "write"
+    },
+    {
+      "id": "setLanguage",
+      "summary": "Choose the language Wikipedia is read in, as the language box does",
+      "effect": "write",
+      "params": {
+        "lang": {
+          "type": "string",
+          "description": "The language",
+          "enum": [
+            "en",
+            "fr",
+            "es"
+          ]
+        }
+      },
+      "required": [
+        "lang"
+      ]
+    },
+    {
+      "id": "retryLibrary",
+      "summary": "Read again the record of what is in memory when it was unreadable, as the Retry button does",
+      "effect": "write"
+    },
+    {
+      "id": "listSource",
+      "summary": "Open a source's list of texts in a topic, as its Open button does, and say how many there are",
+      "details": "The topic is shown and the list read on screen. Answers the count and the first 30 entries; page through them with entries. A list that takes longer than 45 s answers running: call status, then entries.",
+      "effect": "write",
+      "params": {
+        "topic": {
+          "type": "string",
+          "description": "The topic; the topic on screen when absent",
+          "enum": [
+            "biases",
+            "disorders",
+            "schools",
+            "neuro",
+            "memory"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "description": "The source",
+          "enum": [
+            "wikipedia",
+            "openstax",
+            "nimh"
+          ]
+        },
+        "lang": {
+          "type": "string",
+          "description": "Wikipedia's language; the language chosen on screen when absent. Other sources are English only",
+          "enum": [
+            "en",
+            "fr",
+            "es"
+          ]
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    {
+      "id": "entries",
+      "summary": "Page through an open list of texts, with each one's state (in memory, failed, not added)",
+      "effect": "read",
+      "params": {
+        "topic": {
+          "type": "string",
+          "description": "The topic; the topic on screen when absent",
+          "enum": [
+            "biases",
+            "disorders",
+            "schools",
+            "neuro",
+            "memory"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "description": "The source; the one list open on screen when absent",
+          "enum": [
+            "wikipedia",
+            "openstax",
+            "nimh"
+          ]
+        },
+        "lang": {
+          "type": "string",
+          "description": "Wikipedia's language; the language chosen on screen when absent",
+          "enum": [
+            "en",
+            "fr",
+            "es"
+          ]
+        },
+        "query": {
+          "type": "string",
+          "description": "Part of a title, to narrow the list",
+          "maxLength": 100
+        },
+        "limit": {
+          "type": "number",
+          "description": "How many to return, 30 when absent",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "offset": {
+          "type": "number",
+          "description": "How many to skip, 0 when absent",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      }
+    },
+    {
+      "id": "add",
+      "summary": "Put one text of an open list into memory by its title, as its Add button does",
+      "details": "The text is read from its source, filed in the topic's Memory Pack and copied to the knowledge folder. Answers its outcome; past 45 s it answers running and the job line shows it.",
+      "effect": "write",
+      "params": {
+        "topic": {
+          "type": "string",
+          "description": "The topic; the topic on screen when absent",
+          "enum": [
+            "biases",
+            "disorders",
+            "schools",
+            "neuro",
+            "memory"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "description": "The source; the one list open on screen when absent",
+          "enum": [
+            "wikipedia",
+            "openstax",
+            "nimh"
+          ]
+        },
+        "lang": {
+          "type": "string",
+          "description": "Wikipedia's language; the language chosen on screen when absent",
+          "enum": [
+            "en",
+            "fr",
+            "es"
+          ]
+        },
+        "entryId": {
+          "type": "string",
+          "description": "The text: its title as the person says it (« effet de halo »), or its id from entries",
+          "maxLength": 300
+        }
+      },
+      "required": [
+        "entryId"
+      ]
+    },
+    {
+      "id": "addAll",
+      "summary": "Put every text of an open list not yet in memory into memory, as the Add all button does",
+      "details": "Starts and answers at once: the import runs on screen while MnemoMind stays open and resumes where it stopped. Call status for progress, stop to stop.",
+      "effect": "write",
+      "params": {
+        "topic": {
+          "type": "string",
+          "description": "The topic; the topic on screen when absent",
+          "enum": [
+            "biases",
+            "disorders",
+            "schools",
+            "neuro",
+            "memory"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "description": "The source; the one list open on screen when absent",
+          "enum": [
+            "wikipedia",
+            "openstax",
+            "nimh"
+          ]
+        },
+        "lang": {
+          "type": "string",
+          "description": "Wikipedia's language; the language chosen on screen when absent",
+          "enum": [
+            "en",
+            "fr",
+            "es"
+          ]
+        }
+      }
+    },
+    {
+      "id": "stop",
+      "summary": "Stop the list or import running, as the Stop button does; what reached memory stays",
+      "effect": "write"
+    }
+  ],
   "widgets": [
     {
       "id": "mnemo-mind-main",
@@ -40,5 +292,28 @@
       "defaultWidth": 760,
       "defaultHeight": 780
     }
-  ]
+  ],
+  "voiceCommands": {
+    "fr": [
+      "ouvre les biais cognitifs",
+      "passe Wikipédia en français",
+      "ajoute l’effet de halo à ma mémoire",
+      "ajoute tout ce qui reste de la liste",
+      "reviens à l’accueil"
+    ],
+    "en": [
+      "open cognitive biases",
+      "switch Wikipedia to English",
+      "add the halo effect to my memory",
+      "add everything left in the list",
+      "go back home"
+    ],
+    "es": [
+      "abre los sesgos cognitivos",
+      "pasa Wikipedia a español",
+      "añade el efecto halo a mi memoria",
+      "añade todo lo que queda de la lista",
+      "vuelve al inicio"
+    ]
+  }
 }
